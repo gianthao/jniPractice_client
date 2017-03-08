@@ -5,6 +5,7 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
+import android.os.RemoteException;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -15,6 +16,7 @@ import android.widget.CheckBox;
 import android.widget.Toast;
 
 import com.example.user.app_jni.IFpApi;
+import com.example.user.app_jni.IMessageCallback;
 import com.example.user.app_jni.Person;
 
 public class MainActivity extends AppCompatActivity {
@@ -28,18 +30,47 @@ public class MainActivity extends AppCompatActivity {
     private CheckBox checkBox5 = null;
     private IFpApi fpApi;
     private Person person;
+    private int callback_received_cnt = 0;
+
+    IMessageCallback.Stub messageCallback =new IMessageCallback.Stub() {
+        @Override
+        public String getName() throws RemoteException {
+            System.out.println("FpService callback message received");
+            callback_received_cnt++;
+//            Toast.makeText(getApplicationContext(), "100", Toast.LENGTH_SHORT).show();
+//            checkBox1.setChecked(true);
+            return "xh";
+        }
+    };
 
     private ServiceConnection serviceConnection =new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             System.out.println("FpService connected");
             fpApi = IFpApi.Stub.asInterface(service);
+            if(fpApi!=null) {
+                try {
+                    fpApi.registerCallback(messageCallback);
+                    System.out.println("FpService registerCallback");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
             fpApi =null;
             System.out.println("FpService disconnected");
+            if(fpApi!=null) {
+                try {
+                    fpApi.unregisterCallback(messageCallback);
+                    System.out.println("FpService unregisterCallback");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
         }
     };
     public void onCheckboxClicked(View view) {
@@ -62,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
                         {
                             System.out.println("quto_server_method getCount() fail");
                         }
-                        Toast.makeText(getApplicationContext(), "count=" + count+", person="+name, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "count=" + count+", person="+name+",callback_received_cnt="+callback_received_cnt, Toast.LENGTH_SHORT).show();
                     }
                     else
                         Toast.makeText(getApplicationContext(), "service is null, retry", Toast.LENGTH_SHORT).show();

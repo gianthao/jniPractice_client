@@ -3,4 +3,9 @@
 
     <string name="FpTest">FpTest</string>
     <string name="action_settings">Settings</string>
+    <string name="nofingerprint">Sensor not detected</string>
+    <string name="checkSensor">Pleas check the sensor connection</string>
+    <string name="noenrolledfinger">No Enrolled Finger</string>
+    <string name="checksetting">Pleas go to setting and set up a fingerprint</string>
+    <string name="testfinished">Test finished</string>
 </resources>

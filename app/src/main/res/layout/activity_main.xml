@@ -7,58 +7,100 @@
     android:orientation="vertical"
     android:weightSum="1">
 
-    <TextView android:text="@string/FpTest" android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView" />
-
-    <Button
-        android:id="@+id/BUTTON"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="turn_on_service"/>
-
     <TextView
-        android:layout_width="109dp"
-        android:layout_height="50dp"
-        android:text="divide line"
-        android:id="@+id/textView3"
-        android:layout_weight="0.13" />
-    <CheckBox
-        android:id="@+id/CHECKBOX1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="fingerprint1"
-        android:onClick="onCheckboxClicked"/>
+        android:textAppearance="?android:textAppearanceLarge"
+        android:paddingTop="12dp"
+        android:text="Confirm your fingerprint"/>
 
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="140dp"
+        android:orientation="horizontal">
+        <ImageView
+            android:id="@+id/image"
+            android:src="@drawable/ic_fp_40px"
+            android:paddingLeft="24dp"
+            android:paddingBottom="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="18dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/enroll_staus"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="30dp"
+            android:paddingBottom="12dp"
+            android:text="Touch sensor"/>
+    </LinearLayout>
     <TextView
-        android:layout_width="109dp"
-        android:layout_height="50dp"
-        android:text="divide line"
-        android:id="@+id/textView2"
-        android:layout_weight="0.13" />
+        android:id="@+id/serviceStatus"
+        android:textAppearance="?android:textAppearanceSmall"
+        android:gravity="center_horizontal"
+        android:padding="10dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        />
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="UserInput:"
+            android:padding="7dp"
+            android:id="@+id/text_input"
+            android:gravity="center_vertical"/>
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/text_input"
+            android:id="@+id/eidt_input"
+            android:numeric="integer"
+            android:editable="true"
+            android:hint="Pleas input"
+            android:text="0"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="Corfirm"
+            android:textAllCaps="true"
+            android:onClick="confirm"/>
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/text_total"
+            android:padding="5dp"
+            android:layout_below="@id/eidt_input"
+            android:text="Total:"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/count_total"
+            android:layout_toRightOf="@id/text_total"
+            android:layout_below="@id/eidt_input"
+            android:padding="5dp"
+            android:text="0"/>
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/text_pass"
+            android:padding="5dp"
+            android:layout_below="@id/text_total"
+            android:text="Pass:"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/text_pass"
+            android:layout_below="@id/text_total"
+            android:id="@+id/count_pass"
+            android:padding="5dp"
+            android:text="0"/>
 
-    <CheckBox
-        android:id="@+id/CHECKBOX2"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="fingerprint2"
-        android:onClick="onCheckboxClicked"/>
-    <CheckBox
-        android:id="@+id/CHECKBOX3"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="fingerprint3"
-        android:onClick="onCheckboxClicked"/>
-    <CheckBox
-        android:id="@+id/CHECKBOX4"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="fingerprint4"
-        android:onClick="onCheckboxClicked"/>
-    <CheckBox
-        android:id="@+id/CHECKBOX5"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="fingerprint5"
-        android:onClick="onCheckboxClicked"/>
+    </RelativeLayout>
 </LinearLayout>

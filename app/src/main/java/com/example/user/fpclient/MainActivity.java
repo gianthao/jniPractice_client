@@ -6,7 +6,6 @@ import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.hardware.fingerprint.FingerprintManager;
 import android.os.CancellationSignal;
 import android.os.IBinder;
 import android.os.Looper;
@@ -168,7 +167,6 @@ public class MainActivity extends AppCompatActivity {
 
                     //textView.setText("MSG_AUTH_ACQUIRED");
                     cancel = null;
-                    handleAcquiredInfo(msg.arg1);
                     //delay_updateUI();
                     break;
 
@@ -180,15 +178,6 @@ public class MainActivity extends AppCompatActivity {
                         count_total.setText(""+total);
                     }
                     String errorString =(String) msg.obj;
-                    if(msg.arg1!=FingerprintManager.FINGERPRINT_ERROR_CANCELED) {
-                        Text_verifyStatus.setText(errorString);
-                    }else
-                    Log.i(tag,"FINGERPRINT_ERROR_CANCELED");
-                    Log.i(tag, "lockout errorcode=" + msg.arg1);
-                    if(msg.arg1!=FingerprintManager.FINGERPRINT_ERROR_LOCKOUT) {
-                        Log.i(tag,"lockout code!=7");
-                        delay_updateUI();
-                    }
                     break;
 
                 case MainActivity.MSG_AUTH_FAILED:
@@ -259,28 +248,6 @@ public class MainActivity extends AppCompatActivity {
         },1000);
     }
 
-    public void handleAcquiredInfo(int code){
-        switch (code){
-            case FingerprintManager.FINGERPRINT_ACQUIRED_IMAGER_DIRTY:
-                textView.setText("FINGERPRINT_ACQUIRED_IMAGER_DIRTY");
-                break;
-            case FingerprintManager.FINGERPRINT_ACQUIRED_GOOD:
-                textView.setText("FINGERPRINT_ACQUIRED_GOOD");
-                break;
-            case FingerprintManager.FINGERPRINT_ACQUIRED_TOO_SLOW:
-                textView.setText("FINGERPRINT_ACQUIRED_TOO_SLOW");
-                break;
-            case FingerprintManager.FINGERPRINT_ACQUIRED_INSUFFICIENT:
-                textView.setText("FINGERPRINT_ACQUIRED_INSUFFICIENT");
-                break;
-            case FingerprintManager.FINGERPRINT_ACQUIRED_PARTIAL:
-                textView.setText("FINGERPRINT_ACQUIRED_PARTIAL");
-                break;
-            case FingerprintManager.FINGERPRINT_ACQUIRED_TOO_FAST:
-                textView.setText("FINGERPRINT_ACQUIRED_TOO_FAST");
-        }
-
-    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

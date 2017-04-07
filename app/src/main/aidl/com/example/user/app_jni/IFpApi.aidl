@@ -9,8 +9,8 @@ interface IFpApi {
      * Demonstrates some basic types that you can use as parameters
      * and return values in AIDL.
      */
-    int getCount();
-    Person getPerson();
+    void getCount(in int[] send_data);
+    void getPerson(in Person person);
     void registerCallback(IMessageCallback cb);
     void unregisterCallback(IMessageCallback cb);
 }
